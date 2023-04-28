@@ -68,3 +68,28 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+### Commands
+
+Run the mock backend server in the data directory `npx json-server --watch src/data/productsJsonServer.json -p 4000 --id id`
+
+### To-Do:
+- [x] Create a brief welcome page with details about your company
+- [x] Create a products list where JSON server is called to display productName and UnitPrice
+- [x] Create and style the products card component
+- [x] Create and style the 404 component
+- [x] Create and style a navigation
+- [x] Create and style a spinner component
+- [x] Create and style the error message as a component
+- [x] Create a footer component
+- [] Add a button component to products list?
+
+
+
+### Technology Stack
+- React
+- React Router
+- React JSON Server
+- React classnames
+- Fontawesome (https://fontawesome.com)

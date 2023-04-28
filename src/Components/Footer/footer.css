@@ -1,0 +1,37 @@
+.footer-container {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navigation li {
+  float: left;
+  border-right: 1px solid #bbb;
+}
+
+.navigation li:last-child {
+  border-right: none;
+}
+
+.navigation li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.navigation li a:hover:not(.active) {
+  background-color: #111;
+}
