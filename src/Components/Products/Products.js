@@ -7,8 +7,6 @@ function Products() {
   const [products, setProducts] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [basketItems, setBasketItems] = useState([]);
-  const [stockCount, setStock] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:4000/products")
@@ -29,78 +27,11 @@ function Products() {
       });
   }, []);
 
-
-
-
-
-  function updateStock(newStockCount) {
-    // newStockCount -= 1;
-    setStock(stockCount - 1);
-    console.log(stockCount);
-  }
-  
-
-
-  // const [count, setCount] = useState(props.initialCount);
-
-  // function handleClick() {
-  //   setCount(count - 1);
-  // }
-
-
-
-
-  // useEffect(() => {
-  //   setItemCount(basketItems.reduce((total, item) => total + item.quantity, 0));
-  // }, [basketItems]);
-
-  // const addToBasket = (product, quantity) => {
-  //   if (quantity > product.UnitsInStock) {
-  //     console.log("error");
-  //     return;
-  //   }
-
-  //   const existingItemIndex = basketItems.findIndex(
-  //     (item) => item.product.id === product.id
-  //   );
-
-  //   if (existingItemIndex > -1) {
-  //     // If the item is already in the basket, update the quantity
-  //     const updatedBasketItems = [...basketItems];
-  //     updatedBasketItems[existingItemIndex].quantity += quantity;
-  //     setBasketItems(updatedBasketItems);
-  //     console.log("update quantity");
-  //   } else {
-  //     // If the item is not in the basket, add it as a new item
-  //     const newItem = {
-  //       product: product,
-  //       quantity: quantity,
-  //     };
-  //     setBasketItems([...basketItems, newItem]);
-      
-  //     console.log("new item");
-  //   }
-  // };
-
-
-
-  // console.log(basketItems);
-
-
-
-
   return (
     <div>
       {error && <ResourceError error={error} />}
       {isLoading && <Spinner />}
-      {products && (
-        <ProductList
-          products={products}
-          // updateStock={(stockCount) => updateStock(stockCount)}
-          // addToBasket={(product, quantity) => addToBasket(product, quantity)}
-          // itemCount={itemCount}
-        />
-      )}
+      {products && <ProductList products={products} />}
     </div>
   );
 }

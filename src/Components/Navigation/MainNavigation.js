@@ -8,8 +8,6 @@ function MainNavigation({basketCount}) {
 
   const basketClass = classNames("basket-amount", (basketCount === 0) ? "empty-basket" : "value-basket");
 
-  console.log(basketClass);
-
   return (
     <div>
       <nav className="navigation">

@@ -11,13 +11,40 @@ function ProductList(props) {
 
   const [basketCount, setBasketCount] = useState(0);
 
+  const [basketItems, setBasketItems] = useState([]);
+
   function handleStockChange(index) {
     setStockCount((prevCounts) => {
       const stockCount = [...prevCounts];
       stockCount[index] -= 1;
-      setBasketCount(basketCount + 1);
       return stockCount;
     });
+  }
+
+  // Function to add to the basket
+  function addToBasket(product, index) {
+    const basketItemsArray = Object.values(basketItems);
+    const existingItemIndex = basketItemsArray.findIndex(
+      (item) => item.product.id === product.id
+    );
+
+    // If in basket already then add quantity + 1
+    if (existingItemIndex !== -1) {
+      const updatedItems = { ...basketItems };
+      updatedItems[product.id].quantity += 1;
+      setBasketItems(updatedItems);
+    }
+    // If not in basket already then add it and initiate the new object and basket change
+    else {
+      setBasketItems((prevItems) => ({
+        ...prevItems,
+        [product.id]: { product: product, quantity: 1 },
+      }));
+
+      setBasketCount(basketCount + 1); // Add 1 to the basket, if multiple of same then we do not wish to update
+    }
+
+    handleStockChange(index); // Execute the stock change function
   }
 
   return (
@@ -35,7 +62,7 @@ function ProductList(props) {
             </div>
             <div className="card-footer">
               {stockCount[index] > 0 ? ( // If has stock show the button
-                <button onClick={() => handleStockChange(index)}>
+                <button onClick={() => addToBasket(product, index, index)}>
                   Add to basket
                 </button>
               ) : (
