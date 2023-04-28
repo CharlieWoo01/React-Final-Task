@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./styles/App.css";
 import Products from "./Components/Products/Products";
-import MainNavigation from "./Components/Navigation/MainNavigation";
 import NotFound from "./Components/Errors/NotFound";
 import Welcome from "./Components/Welcome/Welcome";
 import Footer from "./Components/Footer/Footer";
