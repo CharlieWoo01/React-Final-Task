@@ -49,7 +49,7 @@ function ProductList(props) {
 
   return (
     <>
-      <MainNavigation basketCount={basketCount} />
+      <MainNavigation basketCount={basketCount} basketProducts={basketItems}/>
       {props.products.map((product, index) => (
         <div key={product.id} className="card-container">
           <Card>
