@@ -5,9 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
 function MainNavigation({ basketCount, basketProducts }) {
+
+  const basketCounter = basketCount ?? 0;
+
   const basketClass = classNames(
     "basket-amount",
-    basketCount === 0 ? "empty-basket" : "value-basket"
+    basketCounter === 0 ? "empty-basket" : "value-basket"
   );
 
   return (
@@ -29,7 +32,7 @@ function MainNavigation({ basketCount, basketProducts }) {
                 }}
               >
                 <FontAwesomeIcon icon={faShoppingBasket} />
-                <span className={basketClass}>{basketCount}</span>
+                <span className={basketClass}>{basketCounter}</span>
               </Link>
             </div>
           </li>
