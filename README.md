@@ -96,3 +96,9 @@ Run the mock backend server in the data directory `npx json-server --watch src/d
 
 ### Preview
 ![image](https://user-images.githubusercontent.com/68980359/236216972-2fdf42bf-dad7-42e8-8338-9b8ccdc5aedc.png)
+
+![image](https://user-images.githubusercontent.com/68980359/236218111-debc0873-88a1-4b21-a8f5-2a61f26d38f1.png)
+
+![image](https://user-images.githubusercontent.com/68980359/236218329-b16a6a72-b1fb-439b-b7e8-0d1cde4bc68c.png)
+
+![image](https://user-images.githubusercontent.com/68980359/236218454-de73c4db-f204-4774-8783-5f0b3b40103a.png)
