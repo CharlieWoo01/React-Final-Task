@@ -2,6 +2,11 @@ import Card from "../Card/Card";
 import { useState } from "react";
 import MainNavigation from "../Navigation/MainNavigation";
 
+/**
+ * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
+ * @todo: Style the remove all button
+ * @todo: Add alert notifications
+ */
 function ProductList(props) {
   const [initialStock] = useState(
     props.products.map((product) => product.UnitsInStock)
@@ -90,16 +95,21 @@ function ProductList(props) {
     }
   }
 
-  // To clear local storage when needed to refresh etc, can implement remove all to use this I guess
-  // localStorage.clear();
+  function basketRemoveAll() {
+    localStorage.clear();
+  }
 
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
-   * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided
    */
   return (
     <>
       <MainNavigation />
+      {window.location.pathname === "/shopping-basket" && (
+        <div className="">
+          <button onClick={() => basketRemoveAll()}>Remove</button>
+        </div>
+      )}
       {props.products.map((product, index) => (
         <div key={product.id} className="card-container">
           <Card>
