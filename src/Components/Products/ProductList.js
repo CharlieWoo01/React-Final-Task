@@ -58,7 +58,7 @@ function ProductList(props) {
   //  localStorage.clear();
   return (
     <>
-      <MainNavigation basketCount={basketCount} basketProducts={[]} />
+      <MainNavigation />
       {props.products.map((product, index) => (
         <div key={product.id} className="card-container">
           <Card>

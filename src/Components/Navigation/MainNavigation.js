@@ -4,9 +4,8 @@ import { faShoppingBasket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
-function MainNavigation({ basketCount, basketProducts }) {
-
-  const basketCounter = basketCount ?? 0;
+function MainNavigation() {
+  const basketCounter = localStorage.getItem("basketCount");
 
   const basketClass = classNames(
     "basket-amount",
@@ -25,12 +24,7 @@ function MainNavigation({ basketCount, basketProducts }) {
           </li>
           <li style={{ float: "right" }}>
             <div className="basket-container">
-              <Link
-                to={{
-                  pathname: "/shopping-basket",
-                  state: { basketProducts: basketProducts },
-                }}
-              >
+              <Link to="/shopping-basket">
                 <FontAwesomeIcon icon={faShoppingBasket} />
                 <span className={basketClass}>{basketCounter}</span>
               </Link>
