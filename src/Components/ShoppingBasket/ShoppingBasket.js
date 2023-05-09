@@ -1,15 +1,12 @@
-import MainNavigation from "../Navigation/MainNavigation";
 import ProductList from "../Products/ProductList";
-import { useLocation } from "react-router-dom";
 
 function ShoppingBasket() {
-  const location = useLocation();
-  const basket = location.state?.basketProducts;
-  console.log(location.state);
+  const basketItems = JSON.parse(localStorage.getItem("basketItems"));
+  const basketItemsArray = Object.values(basketItems || {}); // Convert object to array
+  console.log(basketItemsArray);
   return (
     <>
-      <MainNavigation />
-      {/* { <ProductList products={basket} /> */}
+      <ProductList products={basketItemsArray} />
     </>
   );
 }

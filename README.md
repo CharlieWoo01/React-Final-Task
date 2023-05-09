@@ -93,6 +93,7 @@ Run the mock backend server in the data directory `npx json-server --watch src/d
 - React JSON Server
 - React classnames
 - Fontawesome (https://fontawesome.com)
+- Localstorage React Hook
 
 ### Preview
 ![image](https://user-images.githubusercontent.com/68980359/236216972-2fdf42bf-dad7-42e8-8338-9b8ccdc5aedc.png)

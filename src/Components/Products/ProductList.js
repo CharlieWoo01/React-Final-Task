@@ -11,7 +11,13 @@ function ProductList(props) {
 
   const [basketCount, setBasketCount] = useState(0);
 
-  const [basketItems, setBasketItems] = useState([]);
+  const [basketItems, setBasketItems] = useState(() => {
+    const storedBasketItems = localStorage.getItem('basketItems');
+    if (storedBasketItems) {
+      return JSON.parse(storedBasketItems);
+    }
+    return [];
+  });
 
   function handleStockChange(index) {
     setStockCount((prevCounts) => {
@@ -33,6 +39,8 @@ function ProductList(props) {
       const updatedItems = { ...basketItems };
       updatedItems[product.id].quantity += 1;
       setBasketItems(updatedItems);
+
+      localStorage.setItem('basketItems', JSON.stringify(updatedItems));
     }
     // If not in basket already then add it and initiate the new object and basket change
     else {
@@ -40,6 +48,12 @@ function ProductList(props) {
         ...prevItems,
         [product.id]: { product: product, quantity: 1 },
       }));
+
+          // Update local storage
+    localStorage.setItem('basketItems', JSON.stringify({
+      ...basketItems,
+      [product.id]: { product: product, quantity: 1 },
+    }));
 
       setBasketCount(basketCount + 1); // Add 1 to the basket, if multiple of same then we do not wish to update
     }
