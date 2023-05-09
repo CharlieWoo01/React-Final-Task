@@ -7,6 +7,8 @@ import MainNavigation from "../Navigation/MainNavigation";
  * @todo: Style the remove all button
  * @todo: Add alert notifications
  * @todo: Add a total of the products price and quantity added up
+ * @todo: Add message if shopping basket empty
+ * @todo: Hide remove all button if empty
  */
 function ProductList(props) {
   const [initialStock] = useState(
@@ -20,6 +22,7 @@ function ProductList(props) {
     if (storedBasketItems) {
       return parseInt(storedBasketItems);
     }
+    localStorage.setItem("basketCount", 0);
     return 0;
   });
 
