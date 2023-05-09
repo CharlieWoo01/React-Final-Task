@@ -11,14 +11,6 @@ function ProductList(props) {
 
   const [basketCount, setBasketCount] = useState(0);
 
-  const [basketItems, setBasketItems] = useState(() => {
-    const storedBasketItems = localStorage.getItem('basketItems');
-    if (storedBasketItems) {
-      return JSON.parse(storedBasketItems);
-    }
-    return [];
-  });
-
   function handleStockChange(index) {
     setStockCount((prevCounts) => {
       const stockCount = [...prevCounts];
@@ -29,41 +21,37 @@ function ProductList(props) {
 
   // Function to add to the basket
   function addToBasket(product, index) {
+    const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
     const basketItemsArray = Object.values(basketItems);
     const existingItemIndex = basketItemsArray.findIndex(
-      (item) => item.product.id === product.id
+      (item) => item.id === product.id
     );
 
     // If in basket already then add quantity + 1
     if (existingItemIndex !== -1) {
       const updatedItems = { ...basketItems };
       updatedItems[product.id].quantity += 1;
-      setBasketItems(updatedItems);
-
-      localStorage.setItem('basketItems', JSON.stringify(updatedItems));
+      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
     }
     // If not in basket already then add it and initiate the new object and basket change
     else {
-      setBasketItems((prevItems) => ({
-        ...prevItems,
-        [product.id]: { product: product, quantity: 1 },
-      }));
-
-          // Update local storage
-    localStorage.setItem('basketItems', JSON.stringify({
-      ...basketItems,
-      [product.id]: { product: product, quantity: 1 },
-    }));
-
-      setBasketCount(basketCount + 1); // Add 1 to the basket, if multiple of same then we do not wish to update
+      localStorage.setItem(
+        "basketItems",
+        JSON.stringify({
+          ...basketItems,
+          [product.id]: { ...product, quantity: 1 },
+        })
+      );
+      setBasketCount((prevCount) => prevCount + 1); // Add 1 to the basket, if multiple of same then we do not wish to update
     }
 
     handleStockChange(index); // Execute the stock change function
   }
 
+  //  localStorage.clear();
   return (
     <>
-      <MainNavigation basketCount={basketCount} basketProducts={basketItems}/>
+      <MainNavigation basketCount={basketCount} basketProducts={[]} />
       {props.products.map((product, index) => (
         <div key={product.id} className="card-container">
           <Card>
