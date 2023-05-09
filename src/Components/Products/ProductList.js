@@ -9,7 +9,13 @@ function ProductList(props) {
 
   const [stockCount, setStockCount] = useState(initialStock);
 
-  const [basketCount, setBasketCount] = useState(0);
+  const [basketCount, setBasketCount] = useState(() => {
+    const storedBasketItems = localStorage.getItem("basketCount");
+    if (storedBasketItems) {
+      return parseInt(storedBasketItems);
+    }
+    return 0;
+  });
 
   function handleStockChange(index) {
     setStockCount((prevCounts) => {
@@ -42,7 +48,8 @@ function ProductList(props) {
           [product.id]: { ...product, quantity: 1 },
         })
       );
-      setBasketCount((prevCount) => prevCount + 1); // Add 1 to the basket, if multiple of same then we do not wish to update
+      setBasketCount(basketCount + 1);
+      localStorage.setItem("basketCount",  basketCount + 1);
     }
 
     handleStockChange(index); // Execute the stock change function
