@@ -49,7 +49,7 @@ function ProductList(props) {
         "basketItems",
         JSON.stringify({
           ...basketItems,
-          [product.id]: { ...product, quantity: 1, totalPrice: price},
+          [product.id]: { ...product, quantity: 1, totalPrice: price },
         })
       );
       setBasketCount(basketCount + 1);
@@ -59,11 +59,12 @@ function ProductList(props) {
     handleStockChange(index); // Execute the stock change function
   }
 
-
+  // To clear local storage when needed to refresh etc, can implement remove all to use this I guess
   //  localStorage.clear();
 
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
+   * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided
    */
   return (
     <>
@@ -83,8 +84,8 @@ function ProductList(props) {
                   </>
                 ) : (
                   <>
-                    <p>Total Price: £{ product.totalPrice }</p>
-                    <p>Quantity: { product.quantity }</p>
+                    <p>Total Price: £{product.totalPrice}</p>
+                    <p>Quantity: {product.quantity}</p>
                   </>
                 )}
               </div>
@@ -94,7 +95,9 @@ function ProductList(props) {
                     {stockCount[index] > 0 ? (
                       <button
                         className="add-basket-controls"
-                        onClick={() => addToBasket(product, index, product.UnitPrice)}
+                        onClick={() =>
+                          addToBasket(product, index, product.UnitPrice)
+                        }
                       >
                         Add to basket
                       </button>
@@ -104,7 +107,14 @@ function ProductList(props) {
                   </>
                 ) : (
                   <>
-                    <button className="shopping-basket-controls">+</button>
+                    <button
+                      className="shopping-basket-controls"
+                      onClick={() =>
+                        addToBasket(product, index, product.UnitPrice)
+                      }
+                    >
+                      +
+                    </button>
                     <button className="shopping-basket-controls">-</button>
                   </>
                 )}
