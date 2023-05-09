@@ -75,7 +75,7 @@ function ProductList(props) {
                   <>
                     {stockCount[index] > 0 ? (
                         <button className="add-basket-controls"
-                          onClick={() => addToBasket(product, index, index)}
+                          onClick={() => addToBasket(product, index)}
                         >
                           Add to basket
                         </button>
