@@ -59,8 +59,39 @@ function ProductList(props) {
     handleStockChange(index); // Execute the stock change function
   }
 
+  function removeFromBasket(product, index, price) {
+    const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
+    const basketItemsArray = Object.values(basketItems);
+    const existingItemIndex = basketItemsArray.findIndex(
+      (item) => item.id === product.id
+    );
+
+    /**
+     * If in basket already and over 1 quantity, then remove quantity - 1
+     * @todo Possibly add an else to throw an error if need be for extra security
+     */
+    const updatedItems = { ...basketItems };
+    if (existingItemIndex !== -1 && updatedItems[product.id].quantity > 1) {
+      updatedItems[product.id].quantity -= 1; // Add quantity if exists
+      updatedItems[product.id].totalPrice -= price; // Add up the total price of each product
+      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
+    }
+
+    // If last item then remove it
+    else if (
+      existingItemIndex !== -1 &&
+      updatedItems[product.id].quantity === 1
+    ) {
+      delete updatedItems[product.id]; // Remove the item with matching product ID
+      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
+
+      setBasketCount(basketCount - 1);
+      localStorage.setItem("basketCount", basketCount - 1);
+    }
+  }
+
   // To clear local storage when needed to refresh etc, can implement remove all to use this I guess
-  //  localStorage.clear();
+  // localStorage.clear();
 
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
@@ -115,7 +146,14 @@ function ProductList(props) {
                     >
                       +
                     </button>
-                    <button className="shopping-basket-controls">-</button>
+                    <button
+                      className="shopping-basket-controls"
+                      onClick={() =>
+                        removeFromBasket(product, index, product.UnitPrice)
+                      }
+                    >
+                      -
+                    </button>
                   </>
                 )}
               </div>
