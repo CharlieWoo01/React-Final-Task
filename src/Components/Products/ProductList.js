@@ -49,7 +49,7 @@ function ProductList(props) {
         })
       );
       setBasketCount(basketCount + 1);
-      localStorage.setItem("basketCount",  basketCount + 1);
+      localStorage.setItem("basketCount", basketCount + 1);
     }
 
     handleStockChange(index); // Execute the stock change function
@@ -66,18 +66,30 @@ function ProductList(props) {
               <h2>{product.ProductName}</h2>
             </div>
             <div className="card-body">
-              <p>Price: £{product.UnitPrice}</p>
-              <p>Stock: {stockCount[index]}</p>
-            </div>
-            <div className="card-footer">
-              {stockCount[index] > 0 ? ( // If has stock show the button
-                <button onClick={() => addToBasket(product, index, index)}>
-                  Add to basket
-                </button>
-              ) : (
-                // Else not in stock, then show a message
-                <p style={{ color: "red" }}>Out of stock</p>
-              )}
+              <div className="card-information">
+                <p>Price: £{product.UnitPrice}</p>
+                <p>Stock: {stockCount[index]}</p>
+              </div>
+              <div className="button-container">
+                {window.location.pathname === "/products" ? (
+                  <>
+                    {stockCount[index] > 0 ? (
+                        <button className="add-basket-controls"
+                          onClick={() => addToBasket(product, index, index)}
+                        >
+                          Add to basket
+                        </button>
+                    ) : (
+                      <p style={{ color: "red" }}>Out of stock</p>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <button className="shopping-basket-controls">+</button>
+                    <button className="shopping-basket-controls">-</button>
+                  </>
+                )}
+              </div>
             </div>
           </Card>
         </div>

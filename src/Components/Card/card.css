@@ -7,7 +7,7 @@
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 50%;
+  width: 35%;
   padding: 20px;
   box-sizing: border-box;
   margin-top: 20px;
@@ -24,19 +24,50 @@
   margin: 0;
 }
 
-.card button {
+.button-container button {
   display: block;
   margin: 10px 0 0 0;
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.card button:hover {
+.shopping-basket-controls {
+  background-color: rgb(80, 79, 82);
+}
+
+.shopping-basket-controls:hover {
+  background-color: rgb(118, 117, 120);
+}
+
+.add-basket-controls:hover {
   background-color: #00b3ff;
+}
+
+.add-basket-controls {
+  background-color: #007bff;
+}
+
+.card .add-basket-controls:hover {
+  background-color: #00b3ff;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button-container button {
+  margin-right: 10px;
 }
