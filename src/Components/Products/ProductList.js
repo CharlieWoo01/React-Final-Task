@@ -8,7 +8,6 @@ import MainNavigation from "../Navigation/MainNavigation";
  * @todo: Add alert notifications
  * @todo: Add a total of the products price and quantity added up
  * @todo: Add message if shopping basket empty
- * @todo: Hide remove all button if empty
  */
 function ProductList(props) {
   const [initialStock] = useState(
@@ -103,15 +102,16 @@ function ProductList(props) {
     localStorage.clear();
   }
 
+  const basketCounter = localStorage.getItem("basketCount");
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
    */
   return (
     <>
       <MainNavigation />
-      {window.location.pathname === "/shopping-basket" && (
+      {window.location.pathname === "/shopping-basket" && basketCounter > 0 && (
         <div className="">
-          <button onClick={() => basketRemoveAll()}>Remove</button>
+          <button onClick={() => basketRemoveAll()}>Remove All</button>
         </div>
       )}
       {props.products.map((product, index) => (
