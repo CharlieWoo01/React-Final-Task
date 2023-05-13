@@ -9,7 +9,7 @@ function MainNavigation() {
 
   const basketClass = classNames(
     "basket-amount",
-    basketCounter === 0 ? "empty-basket" : "value-basket"
+    basketCounter == 0 ? "empty-basket" : "value-basket"
   );
 
   return (
