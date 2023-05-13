@@ -4,7 +4,6 @@ import MainNavigation from "../Navigation/MainNavigation";
 
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
- * @todo: Style the remove all button
  * @todo: Add alert notifications
  * @todo: Add a total of the products price and quantity added up
  * @todo: Add message if shopping basket empty
@@ -110,8 +109,13 @@ function ProductList(props) {
     <>
       <MainNavigation />
       {window.location.pathname === "/shopping-basket" && basketCounter > 0 && (
-        <div className="">
-          <button onClick={() => basketRemoveAll()}>Remove All</button>
+        <div className="remove-all-button-container">
+          <button
+            className="remove-all-button"
+            onClick={() => basketRemoveAll()}
+          >
+            Remove All
+          </button>
         </div>
       )}
       {props.products.map((product, index) => (

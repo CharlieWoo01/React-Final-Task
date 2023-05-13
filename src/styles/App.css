@@ -1,0 +1,25 @@
+/**
+* @todo: Move general styles e.g button in card.css into here if reused elsewhere all same styles or btn component
+**/
+.remove-all-button {
+    background-color: rgb(230, 15, 15);
+    display: block;
+    margin: 10px 0 0 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-all-button:hover {
+    background-color: rgb(146, 12, 12);
+}
+
+.remove-all-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+}
