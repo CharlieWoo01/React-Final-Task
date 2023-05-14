@@ -5,7 +5,6 @@ import MainNavigation from "../Navigation/MainNavigation";
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
  * @todo: Add alert notifications
- * @todo: Add a total of the products price and quantity added up
  * @todo: Add message if shopping basket empty
  */
 function ProductList(props) {
@@ -102,6 +101,15 @@ function ProductList(props) {
   }
 
   const basketCounter = localStorage.getItem("basketCount");
+
+  const basketItems = JSON.parse(localStorage.getItem("basketItems"));
+  let basketCost = 0;
+  const basketItemsArray = Object.values(basketItems || {}); // Convert object to array
+  basketItemsArray.forEach((basket) => {
+    basketCost += basket.totalPrice;
+  });
+
+  console.log(basketItems);
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
    */
@@ -109,14 +117,19 @@ function ProductList(props) {
     <>
       <MainNavigation />
       {window.location.pathname === "/shopping-basket" && basketCounter > 0 && (
-        <div className="remove-all-button-container">
-          <button
-            className="remove-all-button"
-            onClick={() => basketRemoveAll()}
-          >
-            Remove All
-          </button>
-        </div>
+        <>
+          <div className="remove-all-button-container">
+            <button
+              className="remove-all-button"
+              onClick={() => basketRemoveAll()}
+            >
+              Remove All
+            </button>
+          </div>
+          <div clas="remove-all-button-container">
+            <p>Total Cost: £ {basketCost}.00</p>
+          </div>
+        </>
       )}
       {props.products.map((product, index) => (
         <div key={product.id} className="card-container">
