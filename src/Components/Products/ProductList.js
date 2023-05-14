@@ -6,6 +6,7 @@ import MainNavigation from "../Navigation/MainNavigation";
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
  * @todo: Add alert notifications
  * @todo: Add message if shopping basket empty
+ * @todo: Change product overall cost to a function to neaten it up
  */
 function ProductList(props) {
   const [initialStock] = useState(
