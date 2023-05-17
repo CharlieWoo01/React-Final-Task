@@ -24,6 +24,7 @@ function ProductList(props) {
     return 0;
   });
 
+  // Function to handle the change of the stock
   function handleStockChange(index) {
     setStockCount((prevCounts) => {
       const stockCount = [...prevCounts];
@@ -66,6 +67,7 @@ function ProductList(props) {
     handleStockChange(index); // Execute the stock change function
   }
 
+  // Function to remove items from the basket
   function removeFromBasket(product, index, price) {
     const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
     const basketItemsArray = Object.values(basketItems);
@@ -97,12 +99,15 @@ function ProductList(props) {
     }
   }
 
+  // Function to remove all items from the basket
   function basketRemoveAll() {
     localStorage.clear();
   }
 
+  // Count of the contents of the basket
   const basketCounter = localStorage.getItem("basketCount");
 
+  // Block of code to add up the total cost of the items
   const basketItems = JSON.parse(localStorage.getItem("basketItems"));
   let basketCost = 0;
   const basketItemsArray = Object.values(basketItems || {}); // Convert object to array
@@ -110,7 +115,6 @@ function ProductList(props) {
     basketCost += basket.totalPrice;
   });
 
-  console.log(basketItems);
   /**
    * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
    */
