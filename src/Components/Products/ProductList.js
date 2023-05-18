@@ -144,15 +144,15 @@ function ProductList(props) {
       {window.location.pathname === "/shopping-basket" && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
+            <p>Total Cost: £ {basketCost}.00</p>
+          </div>
+          <div className="remove-all-button-container">
             <button
               className="remove-all-button"
               onClick={() => basketRemoveAll()}
             >
               Remove All
             </button>
-          </div>
-          <div clas="remove-all-button-container">
-            <p>Total Cost: £ {basketCost}.00</p>
           </div>
         </>
       )}
@@ -196,7 +196,9 @@ function ProductList(props) {
                   <>
                     <button
                       className="shopping-basket-controls"
-                      onClick={() => addToBasket(product, index, product.UnitPrice)}
+                      onClick={() =>
+                        addToBasket(product, index, product.UnitPrice)
+                      }
                     >
                       +
                     </button>
