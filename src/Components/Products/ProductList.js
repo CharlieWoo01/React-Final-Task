@@ -126,31 +126,25 @@ function ProductList(props) {
   };
 
   // Block of code to add up the total cost of the items
-  /**
-   * @todo refactor this as a function
-   */
   let basketCost = 0;
   const basketItemsArray = currentBasket ? Object.values(currentBasket) : []; // Convert object to array
   basketItemsArray.forEach((basket) => {
     basketCost += basket.totalPrice;
   });
 
-  /**
-   * @todo: Possibly look at alternatives of neating this up as a lot of inline conditionals
-   */
+  const isShoppingBasketPage = window.location.pathname === "/shopping-basket";
+  const isProductsPage = window.location.pathname === "/products";
+
   return (
     <>
       <MainNavigation />
-      {window.location.pathname === "/shopping-basket" && basketCount > 0 && (
+      {isShoppingBasketPage && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
             <p>Total Cost: £ {basketCost}.00</p>
           </div>
           <div className="remove-all-button-container">
-            <button
-              className="remove-all-button"
-              onClick={() => basketRemoveAll()}
-            >
+            <button className="remove-all-button" onClick={basketRemoveAll}>
               Remove All
             </button>
           </div>
@@ -164,7 +158,7 @@ function ProductList(props) {
             </div>
             <div className="card-body">
               <div className="card-information">
-                {window.location.pathname === "/products" ? (
+                {isProductsPage ? (
                   <>
                     <p>Price: £{product.UnitPrice}</p>
                     <p>Stock: {stockCount[index]}</p>
@@ -177,22 +171,19 @@ function ProductList(props) {
                 )}
               </div>
               <div className="button-container">
-                {window.location.pathname === "/products" ? (
-                  <>
-                    {stockCount[index] > 0 ? (
-                      <button
-                        className="add-basket-controls"
-                        onClick={() =>
-                          addToBasket(product, index, product.UnitPrice)
-                        }
-                      >
-                        Add to basket
-                      </button>
-                    ) : (
-                      <p style={{ color: "red" }}>Out of stock</p>
-                    )}
-                  </>
+                {isProductsPage && stockCount[index] > 0 ? (
+                  <button
+                    className="add-basket-controls"
+                    onClick={() =>
+                      addToBasket(product, index, product.UnitPrice)
+                    }
+                  >
+                    Add to basket
+                  </button>
                 ) : (
+                  isProductsPage && <p style={{ color: "red" }}>Out of stock</p>
+                )}
+                {!isProductsPage && (
                   <>
                     <button
                       className="shopping-basket-controls control-add"
