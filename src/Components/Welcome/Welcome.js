@@ -1,8 +1,10 @@
 import Card from "../Card/Card";
+import MainNavigation from "../Navigation/MainNavigation";
 
 function Welcome() {
   return (
     <>
+    <MainNavigation />
       <div className="card-container">
         <Card>
           Welcome to NatWest, a leading retail and commercial bank in the United
