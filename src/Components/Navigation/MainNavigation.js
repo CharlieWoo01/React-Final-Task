@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames";
 
 function MainNavigation() {
-  const basketCounter = localStorage.getItem("basketCount");
+  const basketCounter = localStorage.getItem("basketCount") ?? 0;
 
   const basketClass = classNames(
     "basket-amount",

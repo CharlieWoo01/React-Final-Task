@@ -1,5 +1,5 @@
 import Card from "../Card/Card";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MainNavigation from "../Navigation/MainNavigation";
 
 /**
@@ -13,15 +13,55 @@ function ProductList(props) {
     props.products.map((product) => product.UnitsInStock)
   );
 
+  function useStateWithLocalStorage(localStorageKey, defaultValue) {
+    const [value, setValue] = useState(
+      localStorage.getItem(localStorageKey) || defaultValue
+    );
+  
+    useEffect(() => {
+      localStorage.setItem(localStorageKey, value);
+    }, [localStorageKey, value]);
+  
+    return [value, setValue];
+  }
+
+  const [basketCount, setBasketCount] = useStateWithLocalStorage('basketCount', 0);
+
+  const basketIncrement = () => {
+    setBasketCount(prevCount => prevCount + 1);
+  };
+
+  const basketDecrease = () => {
+    setBasketCount(prevCount => prevCount - 1);
+  };
+    
   const [stockCount, setStockCount] = useState(initialStock);
 
-  const [basketCount, setBasketCount] = useState(() => {
-    const storedBasketItems = localStorage.getItem("basketCount");
-    if (storedBasketItems) {
-      return parseInt(storedBasketItems);
+  /**
+   * @todo: Integrate this as a function rather than reusing it multiple times.
+   */
+  // const [basketCount, setBasketCount] = useState(() => {
+  //   const storedBasketItems = localStorage.getItem("basketCount");
+  //   if (storedBasketItems) {
+  //     return parseInt(storedBasketItems);
+  //   }
+  //   localStorage.setItem("basketCount", 0);
+  //   return 0;
+  // });
+
+  // Function using use state to update the current basket
+  /**
+   * @todo: Fix this code
+   */
+  const [currentBasket, setCurrentBasket] = useState(() => {
+    const basketItems = JSON.parse(localStorage.getItem("basketItems"));
+    console.log(basketItems);
+    if (basketItems) {
+      // Basket is not empty then set the items
+      localStorage.setItem("basketItems", JSON.stringify(basketItems));
+      return basketItems;
     }
-    localStorage.setItem("basketCount", 0);
-    return 0;
+    return;
   });
 
   // Function to handle the change of the stock
@@ -38,30 +78,25 @@ function ProductList(props) {
    * @todo: Look to refactor this as it is a massive function now and fairly complex
    */
   function addToBasket(product, index, price) {
-    const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
-    const basketItemsArray = Object.values(basketItems);
+    const basketItemsArray = currentBasket ? Object.values(currentBasket) : [];
     const existingItemIndex = basketItemsArray.findIndex(
       (item) => item.id === product.id
     );
 
     // If in basket already then add quantity + 1
     if (existingItemIndex !== -1) {
-      const updatedItems = { ...basketItems };
+      const updatedItems = { ...currentBasket };
       updatedItems[product.id].quantity += 1; // Add quantity if exists
       updatedItems[product.id].totalPrice += price; // Add up the total price of each product
-      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
+      setCurrentBasket(updatedItems);
     }
     // If not in basket already then add it and initiate the new object and basket change
     else {
-      localStorage.setItem(
-        "basketItems",
-        JSON.stringify({
-          ...basketItems,
-          [product.id]: { ...product, quantity: 1, totalPrice: price },
-        })
-      );
-      setBasketCount(basketCount + 1);
-      localStorage.setItem("basketCount", basketCount + 1);
+      basketIncrement(); // Increment the basket
+      setCurrentBasket({
+        ...currentBasket,
+        [product.id]: { ...product, quantity: 1, totalPrice: price },
+      });
     }
 
     handleStockChange(index); // Execute the stock change function
@@ -69,8 +104,7 @@ function ProductList(props) {
 
   // Function to remove items from the basket
   function removeFromBasket(product, index, price) {
-    const basketItems = JSON.parse(localStorage.getItem("basketItems")) || {};
-    const basketItemsArray = Object.values(basketItems);
+    const basketItemsArray = Object.values(currentBasket);
     const existingItemIndex = basketItemsArray.findIndex(
       (item) => item.id === product.id
     );
@@ -79,11 +113,11 @@ function ProductList(props) {
      * If in basket already and over 1 quantity, then remove quantity - 1
      * @todo Possibly add an else to throw an error if need be for extra security
      */
-    const updatedItems = { ...basketItems };
+    const updatedItems = { ...currentBasket };
     if (existingItemIndex !== -1 && updatedItems[product.id].quantity > 1) {
       updatedItems[product.id].quantity -= 1; // Add quantity if exists
       updatedItems[product.id].totalPrice -= price; // Add up the total price of each product
-      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
+      setCurrentBasket(updatedItems);
     }
 
     // If last item then remove it
@@ -92,10 +126,8 @@ function ProductList(props) {
       updatedItems[product.id].quantity === 1
     ) {
       delete updatedItems[product.id]; // Remove the item with matching product ID
-      localStorage.setItem("basketItems", JSON.stringify(updatedItems));
-
-      setBasketCount(basketCount - 1);
-      localStorage.setItem("basketCount", basketCount - 1);
+      setCurrentBasket(updatedItems);
+      basketDecrease();
     }
   }
 
@@ -104,13 +136,9 @@ function ProductList(props) {
     localStorage.clear();
   }
 
-  // Count of the contents of the basket
-  const basketCounter = localStorage.getItem("basketCount");
-
   // Block of code to add up the total cost of the items
-  const basketItems = JSON.parse(localStorage.getItem("basketItems"));
   let basketCost = 0;
-  const basketItemsArray = Object.values(basketItems || {}); // Convert object to array
+  const basketItemsArray = currentBasket ? Object.values(currentBasket) : []; // Convert object to array
   basketItemsArray.forEach((basket) => {
     basketCost += basket.totalPrice;
   });
@@ -121,7 +149,7 @@ function ProductList(props) {
   return (
     <>
       <MainNavigation />
-      {window.location.pathname === "/shopping-basket" && basketCounter > 0 && (
+      {window.location.pathname === "/shopping-basket" && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
             <button
