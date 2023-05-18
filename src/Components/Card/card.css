@@ -40,6 +40,14 @@
   background-color: rgb(80, 79, 82);
 }
 
+.control-add:before {
+  content: "\002B"; /* Unicode for a plus sign */
+}
+
+.control-remove:before {
+  content: "\002D";
+}
+
 .shopping-basket-controls:hover {
   background-color: rgb(118, 117, 120);
 }

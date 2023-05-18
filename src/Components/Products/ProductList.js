@@ -195,21 +195,17 @@ function ProductList(props) {
                 ) : (
                   <>
                     <button
-                      className="shopping-basket-controls"
+                      className="shopping-basket-controls control-add"
                       onClick={() =>
                         addToBasket(product, index, product.UnitPrice)
                       }
-                    >
-                      +
-                    </button>
+                    ></button>
                     <button
-                      className="shopping-basket-controls"
+                      className="shopping-basket-controls control-remove"
                       onClick={() =>
                         removeFromBasket(product, product.UnitPrice)
                       }
-                    >
-                      -
-                    </button>
+                    ></button>
                   </>
                 )}
               </div>
