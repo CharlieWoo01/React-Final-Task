@@ -13,45 +13,49 @@ function ProductList(props) {
     props.products.map((product) => product.UnitsInStock)
   );
 
+  /**
+   * Custom function to have use localStorage as useState
+   */
   function useStateWithLocalStorage(localStorageKey, defaultValue) {
-    const [value, setValue] = useState(
-      localStorage.getItem(localStorageKey) || defaultValue
-    );
-  
+    const [value, setValue] = useState(() => {
+      const storedValue = localStorage.getItem(localStorageKey);
+      return storedValue !== null ? JSON.parse(storedValue) : defaultValue;
+    });
+
     useEffect(() => {
-      localStorage.setItem(localStorageKey, value);
+      if (value === null) {
+        localStorage.removeItem(localStorageKey);
+      } else {
+        localStorage.setItem(localStorageKey, JSON.stringify(value));
+      }
     }, [localStorageKey, value]);
-  
+
     return [value, setValue];
   }
 
-  const [basketCount, setBasketCount] = useStateWithLocalStorage('basketCount', 0);
+  // Initialise useState of basketCount and setter
+  const [basketCount, setBasketCount] = useStateWithLocalStorage(
+    "basketCount",
+    0
+  );
 
+  // Add one to the basket count
   const basketIncrement = () => {
-    setBasketCount(prevCount => prevCount + 1);
+    setBasketCount((prevCount) => prevCount + 1);
   };
 
+  // Remove one from the basket count
   const basketDecrease = () => {
-    setBasketCount(prevCount => prevCount - 1);
+    setBasketCount((prevCount) => prevCount - 1);
   };
-    
+
+
   const [stockCount, setStockCount] = useState(initialStock);
 
-
-  // Function using use state to update the current basket
-  /**
-   * @todo: Fix this code
-   */
-  const [currentBasket, setCurrentBasket] = useState(() => {
-    const basketItems = JSON.parse(localStorage.getItem("basketItems"));
-    console.log(basketItems);
-    if (basketItems) {
-      // Basket is not empty then set the items
-      localStorage.setItem("basketItems", JSON.stringify(basketItems));
-      return basketItems;
-    }
-    return;
-  });
+  const [currentBasket, setCurrentBasket] = useStateWithLocalStorage(
+    'basketItems',
+    null
+  );
 
   // Function to handle the change of the stock
   function handleStockChange(index) {
@@ -82,6 +86,7 @@ function ProductList(props) {
     // If not in basket already then add it and initiate the new object and basket change
     else {
       basketIncrement(); // Increment the basket
+
       setCurrentBasket({
         ...currentBasket,
         [product.id]: { ...product, quantity: 1, totalPrice: price },
