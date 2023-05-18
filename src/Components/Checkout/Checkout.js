@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"; // I know it is bad practice but there is a lot of imports here
 import "./Checkout.css";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import MainNavigation from "../Navigation/MainNavigation";
 
 function Checkout() {
   const redirectUser = useNavigate();
@@ -38,37 +39,40 @@ function Checkout() {
   };
 
   return (
-    <div className="form-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="purchase-form">
-        <div className="form-group">
-          <label htmlFor="card-number">Card Number:</label>
-          <input
-            type="text"
-            id="card-number"
-            className="form-input"
-            {...register("cardNumber")} // Register the input with react-hook-form
-          />
-          {errors.cardNumber && (
-            <p className="error-message">{errors.cardNumber.message}</p>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="card-name">Cardholder Name:</label>
-          <input
-            type="text"
-            id="card-name"
-            className="form-input"
-            {...register("cardName")} // Register the input with react-hook-form
-          />
-          {errors.cardName && (
-            <p className="error-message">{errors.cardName.message}</p>
-          )}
-        </div>
-        <button className="form-button" type="submit">
-          Complete Checkout
-        </button>
-      </form>
-    </div>
+    <>
+      <MainNavigation />
+      <div className="form-container">
+        <form onSubmit={handleSubmit(onSubmit)} className="purchase-form">
+          <div className="form-group">
+            <label htmlFor="card-number">Card Number:</label>
+            <input
+              type="text"
+              id="card-number"
+              className="form-input"
+              {...register("cardNumber")} // Register the input with react-hook-form
+            />
+            {errors.cardNumber && (
+              <p className="error-message">{errors.cardNumber.message}</p>
+            )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="card-name">Cardholder Name:</label>
+            <input
+              type="text"
+              id="card-name"
+              className="form-input"
+              {...register("cardName")} // Register the input with react-hook-form
+            />
+            {errors.cardName && (
+              <p className="error-message">{errors.cardName.message}</p>
+            )}
+          </div>
+          <button className="form-button" type="submit">
+            Complete Checkout
+          </button>
+        </form>
+      </div>
+    </>
   );
 }
 

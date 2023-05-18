@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import MainNavigation from "../Navigation/MainNavigation";
 
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
@@ -137,6 +138,7 @@ function ProductList(props) {
 
   return (
     <>
+    <MainNavigation />
       {isShoppingBasketPage && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
