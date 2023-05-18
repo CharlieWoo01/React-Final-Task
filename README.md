@@ -69,12 +69,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
 ### Commands
 
 Run the mock backend server in the data directory `npx json-server --watch src/data/productsJsonServer.json -p 4000 --id id`
 
 ### To-Do:
+
 - [x] Create a brief welcome page with details about your company
 - [x] Create a products list where JSON server is called to display productName and UnitPrice
 - [x] Create and style the products card component
@@ -85,17 +85,20 @@ Run the mock backend server in the data directory `npx json-server --watch src/d
 - [x] Create a footer component
 - [] Add a button component to products list?
 
-
-
 ### Technology Stack
+
 - React
 - React Router
 - React JSON Server
 - React classnames
 - Fontawesome (https://fontawesome.com)
 - Localstorage React Hook
+- Yup
+- React Hook Form
+- Yup resolver
 
 ### Preview
+
 ![image](https://user-images.githubusercontent.com/68980359/236216972-2fdf42bf-dad7-42e8-8338-9b8ccdc5aedc.png)
 
 ![image](https://user-images.githubusercontent.com/68980359/236218111-debc0873-88a1-4b21-a8f5-2a61f26d38f1.png)
@@ -105,4 +108,3 @@ Run the mock backend server in the data directory `npx json-server --watch src/d
 ![image](https://user-images.githubusercontent.com/68980359/236218454-de73c4db-f204-4774-8783-5f0b3b40103a.png)
 
 ![image](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/56e110d7-2893-4a27-a78f-f511e67d52b9)
-
