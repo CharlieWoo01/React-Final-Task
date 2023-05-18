@@ -1,6 +1,7 @@
 import Card from "../Card/Card";
 import { useState, useEffect } from "react";
 import MainNavigation from "../Navigation/MainNavigation";
+import { Link } from "react-router-dom";
 
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
@@ -147,6 +148,8 @@ function ProductList(props) {
             <button className="remove-all-button" onClick={basketRemoveAll}>
               Remove All
             </button>
+
+            <Link to="/checkout">Back to home...</Link>
           </div>
         </>
       )}

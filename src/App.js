@@ -5,6 +5,8 @@ import ErrorPage from "./Components/Errors/ErrorPage";
 import Welcome from "./Components/Welcome/Welcome";
 import Footer from "./Components/Footer/Footer";
 import ShoppingBasket from "./Components/ShoppingBasket/ShoppingBasket";
+import Checkout from "./Components/Checkout/Checkout";
+import MainNavigation from "./Components/Navigation/MainNavigation";
 
 function App() {
   const location = useLocation();
@@ -12,10 +14,12 @@ function App() {
   return (
     <>
       <div>
+        <MainNavigation />
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/products" element={<Products />} />
           <Route path="/shopping-basket" element={<ShoppingBasket />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="*"
             element={
