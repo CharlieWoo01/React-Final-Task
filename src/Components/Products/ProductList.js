@@ -37,17 +37,6 @@ function ProductList(props) {
     
   const [stockCount, setStockCount] = useState(initialStock);
 
-  /**
-   * @todo: Integrate this as a function rather than reusing it multiple times.
-   */
-  // const [basketCount, setBasketCount] = useState(() => {
-  //   const storedBasketItems = localStorage.getItem("basketCount");
-  //   if (storedBasketItems) {
-  //     return parseInt(storedBasketItems);
-  //   }
-  //   localStorage.setItem("basketCount", 0);
-  //   return 0;
-  // });
 
   // Function using use state to update the current basket
   /**
