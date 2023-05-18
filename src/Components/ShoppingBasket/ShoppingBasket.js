@@ -13,7 +13,7 @@ function ShoppingBasket() {
     { basketContentsLength > 0 ? (
       <ProductList products={basketItemsArray} />
     ) : (
-      <ErrorPage error={`Empty Basket`} errorBody={`Basket is current empty`} />
+      <ErrorPage error={`Empty Basket`} errorBody={`Basket is currently empty`} />
     )}
     </>
   );
