@@ -83,6 +83,7 @@ function ProductList(props) {
       const updatedItems = { ...currentBasket };
       updatedItems[product.id].quantity += 1;
       updatedItems[product.id].totalPrice += price;
+      console.log(updatedItems);
       setCurrentBasket(updatedItems);
     }
     // If not in basket already then add it and initiate the new object and increment the basket
@@ -121,7 +122,7 @@ function ProductList(props) {
     }
   };
 
-  // Function to remove all items from the basket
+  // Remove all items from the basket
   const basketRemoveAll = () => {
     localStorage.clear();
   };
@@ -197,14 +198,14 @@ function ProductList(props) {
                   <>
                     <button
                       className="shopping-basket-controls"
-                      onClick={() => addToBasket(product, product.UnitPrice)}
+                      onClick={() => addToBasket(product, index, product.UnitPrice)}
                     >
                       +
                     </button>
                     <button
                       className="shopping-basket-controls"
                       onClick={() =>
-                        removeFromBasket(product, index, product.UnitPrice)
+                        removeFromBasket(product, product.UnitPrice)
                       }
                     >
                       -
