@@ -4,6 +4,7 @@ import MainNavigation from "../Navigation/MainNavigation";
 
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
+ * @todo: Optimise the styles as some can be reused elsewhere
  */
 function ProductList(props) {
   const [initialStock] = useState(
