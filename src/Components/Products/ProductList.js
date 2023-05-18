@@ -49,88 +49,87 @@ function ProductList(props) {
     setBasketCount((prevCount) => prevCount - 1);
   };
 
-
+  // Initialise useState of stockCount and setter
   const [stockCount, setStockCount] = useState(initialStock);
 
+  // Initialise useState of currentBasket and setter
   const [currentBasket, setCurrentBasket] = useStateWithLocalStorage(
-    'basketItems',
+    "basketItems",
     null
   );
 
-  // Function to handle the change of the stock
-  function handleStockChange(index) {
+  // Handle the change of the stock
+  const handleStockChange = (index) => {
     setStockCount((prevCounts) => {
       const stockCount = [...prevCounts];
       stockCount[index] -= 1;
       return stockCount;
     });
-  }
+  };
 
-  /**
-   * Function to add to the basket
-   * @todo: Look to refactor this as it is a massive function now and fairly complex
-   */
-  function addToBasket(product, index, price) {
+  // Find if the existing product exists in the basket
+  const basketProductsExists = (product) => {
     const basketItemsArray = currentBasket ? Object.values(currentBasket) : [];
     const existingItemIndex = basketItemsArray.findIndex(
       (item) => item.id === product.id
     );
+    return existingItemIndex;
+  };
 
-    // If in basket already then add quantity + 1
-    if (existingItemIndex !== -1) {
+  // Add to the basket handler
+  const addToBasket = (product, index, price) => {
+    // If the product exists then will increment the quantity and price within basket
+    if (basketProductsExists(product) !== -1) {
       const updatedItems = { ...currentBasket };
-      updatedItems[product.id].quantity += 1; // Add quantity if exists
-      updatedItems[product.id].totalPrice += price; // Add up the total price of each product
+      updatedItems[product.id].quantity += 1;
+      updatedItems[product.id].totalPrice += price;
       setCurrentBasket(updatedItems);
     }
-    // If not in basket already then add it and initiate the new object and basket change
+    // If not in basket already then add it and initiate the new object and increment the basket
     else {
-      basketIncrement(); // Increment the basket
-
       setCurrentBasket({
         ...currentBasket,
         [product.id]: { ...product, quantity: 1, totalPrice: price },
       });
+      basketIncrement();
     }
 
-    handleStockChange(index); // Execute the stock change function
-  }
+    // Change the stock (This will reset everytime the page is refreshed/landed on)
+    handleStockChange(index);
+  };
 
-  // Function to remove items from the basket
-  function removeFromBasket(product, index, price) {
-    const basketItemsArray = Object.values(currentBasket);
-    const existingItemIndex = basketItemsArray.findIndex(
-      (item) => item.id === product.id
-    );
-
-    /**
-     * If in basket already and over 1 quantity, then remove quantity - 1
-     * @todo Possibly add an else to throw an error if need be for extra security
-     */
+  // Remove items from the basket
+  const removeFromBasket = (product, price) => {
     const updatedItems = { ...currentBasket };
+    const existingItemIndex = basketProductsExists(product);
+
+    // If in basket already and over 1 quantity, then remove quantity - 1 and update price
     if (existingItemIndex !== -1 && updatedItems[product.id].quantity > 1) {
-      updatedItems[product.id].quantity -= 1; // Add quantity if exists
-      updatedItems[product.id].totalPrice -= price; // Add up the total price of each product
+      updatedItems[product.id].quantity -= 1;
+      updatedItems[product.id].totalPrice -= price;
       setCurrentBasket(updatedItems);
     }
 
-    // If last item then remove it
+    // If last item then remove the product and update the basket count
     else if (
       existingItemIndex !== -1 &&
       updatedItems[product.id].quantity === 1
     ) {
-      delete updatedItems[product.id]; // Remove the item with matching product ID
+      delete updatedItems[product.id];
       setCurrentBasket(updatedItems);
       basketDecrease();
     }
-  }
+  };
 
   // Function to remove all items from the basket
-  function basketRemoveAll() {
+  const basketRemoveAll = () => {
     localStorage.clear();
-  }
+  };
 
   // Block of code to add up the total cost of the items
+  /**
+   * @todo refactor this as a function
+   */
   let basketCost = 0;
   const basketItemsArray = currentBasket ? Object.values(currentBasket) : []; // Convert object to array
   basketItemsArray.forEach((basket) => {
@@ -198,9 +197,7 @@ function ProductList(props) {
                   <>
                     <button
                       className="shopping-basket-controls"
-                      onClick={() =>
-                        addToBasket(product, index, product.UnitPrice)
-                      }
+                      onClick={() => addToBasket(product, product.UnitPrice)}
                     >
                       +
                     </button>

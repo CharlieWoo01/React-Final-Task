@@ -2,10 +2,6 @@ import Card from "../Card/Card";
 import MainNavigation from "../Navigation/MainNavigation";
 
 function Welcome() {
-  /**
-   * @todo Sort out the styling properly for fonts etc
-   * @todo Could add i18next for translation to this
-   */
   return (
     <>
       <MainNavigation />
