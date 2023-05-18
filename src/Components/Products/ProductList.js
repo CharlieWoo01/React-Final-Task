@@ -4,7 +4,6 @@ import MainNavigation from "../Navigation/MainNavigation";
 
 /**
  * @todo: Figure out how I can do this for shopping basket without refresh since it's a separate list to the JSON data provided (Use state related)
- * @todo: Change product overall cost to a function to neaten it up
  */
 function ProductList(props) {
   const [initialStock] = useState(
@@ -81,7 +80,6 @@ function ProductList(props) {
       const updatedItems = { ...currentBasket };
       updatedItems[product.id].quantity += 1;
       updatedItems[product.id].totalPrice += price;
-      console.log(updatedItems);
       setCurrentBasket(updatedItems);
     }
     // If not in basket already then add it and initiate the new object and increment the basket
@@ -132,6 +130,7 @@ function ProductList(props) {
     basketCost += basket.totalPrice;
   });
 
+  // Used for conditional rendering
   const isShoppingBasketPage = window.location.pathname === "/shopping-basket";
   const isProductsPage = window.location.pathname === "/products";
 
