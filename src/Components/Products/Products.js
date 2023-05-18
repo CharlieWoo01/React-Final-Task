@@ -1,4 +1,4 @@
-import ResourceError from "../Errors/ResourceError";
+import ErrorPage from "../Errors/ErrorPage";
 import Spinner from "../Spinner/Spinner";
 import ProductList from "./ProductList";
 import { useEffect, useState } from "react";
@@ -29,7 +29,12 @@ function Products() {
 
   return (
     <div>
-      {error && <ResourceError error={error} />}
+      {error && (
+        <ErrorPage
+          error={`Oops - ${error}`}
+          errorBody={`Sorry, there was an fetching the resource`}
+        />
+      )}
       {isLoading && <Spinner />}
       {products && <ProductList products={products} />}
     </div>
