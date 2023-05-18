@@ -1,6 +1,5 @@
 import Card from "../Card/Card";
 import { useState, useEffect } from "react";
-import MainNavigation from "../Navigation/MainNavigation";
 import { Link } from "react-router-dom";
 
 /**
@@ -138,7 +137,6 @@ function ProductList(props) {
 
   return (
     <>
-      <MainNavigation />
       {isShoppingBasketPage && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
