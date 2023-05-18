@@ -21,6 +21,15 @@ function App() {
           <Route path="/shopping-basket" element={<ShoppingBasket />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route
+            path="/success"
+            element={
+              <ErrorPage
+                error={`Transaction Successful!`}
+                errorBody={`Success, you have purchased the items from your basket.`}
+              />
+            }
+          />
+          <Route
             path="*"
             element={
               <ErrorPage

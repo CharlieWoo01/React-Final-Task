@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup"; // I know it is bad practice but there is a lot of imports here
 import "./Checkout.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Checkout() {
-  const history = useHistory();
+  const redirectUser = useNavigate();
 
   // Define the form schema for the validation
   const formValidation = yup.object().shape({
@@ -34,7 +34,7 @@ function Checkout() {
   // Sneaky way of refreshing the page as same issue as before lol
   const onSubmit = () => {
     localStorage.clear();
-    history.push("/success");
+    redirectUser("/success");
   };
 
   return (
