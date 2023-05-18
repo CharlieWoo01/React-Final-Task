@@ -16,10 +16,36 @@
 
 .remove-all-button:hover {
     background-color: rgb(146, 12, 12);
+    text-decoration: none;
 }
 
 .remove-all-button-container {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
     margin: 20px;
+  }
+  
+  .total-cost {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  
+.purchase-button {
+    background-color: #4caf50;
+    display: block;
+    margin: 10px 0 0 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .purchase-button:hover {
+    background-color: #145216;
+    text-decoration: none;
 }

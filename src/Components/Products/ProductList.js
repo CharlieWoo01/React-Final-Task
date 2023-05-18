@@ -142,14 +142,17 @@ function ProductList(props) {
       {isShoppingBasketPage && basketCount > 0 && (
         <>
           <div className="remove-all-button-container">
-            <p>Total Cost: £ {basketCost}.00</p>
-          </div>
-          <div className="remove-all-button-container">
+            <div className="total-cost">
+              <p>Total Cost: £ {basketCost}.00</p>
+            </div>
+
             <button className="remove-all-button" onClick={basketRemoveAll}>
               Remove All
             </button>
 
-            <Link to="/checkout">Back to home...</Link>
+            <Link to="/checkout" className="purchase-button">
+              Checkout
+            </Link>
           </div>
         </>
       )}
