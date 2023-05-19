@@ -99,12 +99,16 @@ Run the mock backend server in the data directory `npx json-server --watch src/d
 
 ### Preview
 
-![image](https://user-images.githubusercontent.com/68980359/236216972-2fdf42bf-dad7-42e8-8338-9b8ccdc5aedc.png)
-
-![image](https://user-images.githubusercontent.com/68980359/236218111-debc0873-88a1-4b21-a8f5-2a61f26d38f1.png)
-
-![image](https://user-images.githubusercontent.com/68980359/236218329-b16a6a72-b1fb-439b-b7e8-0d1cde4bc68c.png)
-
-![image](https://user-images.githubusercontent.com/68980359/236218454-de73c4db-f204-4774-8783-5f0b3b40103a.png)
-
-![image](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/56e110d7-2893-4a27-a78f-f511e67d52b9)
+![Ecommerce_Failed_Fetch_Error](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/3097d0c7-dd1b-48be-8d5a-3669b7124edc)
+![Ecommerce_Spinner](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/a0fa764d-c9cd-4616-a1be-cb33f828f67a)
+![Ecommerce_Shopping_Basket](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/c9413639-43e9-489e-a2f7-f5ed10ab227d)
+![Ecommerce_Index](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/83732acc-b424-45de-8e7c-39b4361ee95f)
+![Ecommerce_Products](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/b17c68da-0c21-4379-bd5c-c771440aa474)
+![Ecommerce_No_Stock](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/06fc9d77-085c-4e2e-9488-b2a8ba89c45a)
+![Ecommerce_Basket_Add](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/428332eb-b670-4eaf-90cc-27cc04003c67)
+![Ecommerce_Basket_Remove](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/570d75fc-e870-4121-9a00-94b3b778985a)
+![Ecommerce_Payment](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/07e58777-b99c-4ed2-8a27-42b711e7be29)
+![Ecommerce_Payment_Error](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/33d49392-eac1-48a9-8e42-ec042af15272)
+![Ecommerce_Transaction_Success](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/3cb1eda0-1b20-4e57-b327-a6cce8041431)
+![Ecommerce_404](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/0780a6e5-95bb-409a-a64f-c2aa95d0787f)
+![Ecommerce_Empty_Basket](https://github.com/CharlieWoo01/React-Final-Task/assets/68980359/5e7d014f-c0e3-4a15-8787-0bca6919c57c)
